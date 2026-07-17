@@ -1,10 +1,9 @@
-namespace TimeSeriesProcessing.Domain.Models;
+namespace TimeSeriesProcessing.Application.Result.Dto;
 
-public class AggregatedResult
+public class ResultItemDto
 {
     public int Id { get; set; }
-    public string FileName { get; set; } = string.Empty;
-    
+    public string FileName { get; set; }
     public int DeltaSeconds { get; set; }
     public DateTime MinDate { get; set; }
     public double AvgExecutionTime { get; set; }
@@ -12,6 +11,4 @@ public class AggregatedResult
     public double MedianValue { get; set; }
     public double MinValue { get; set; }
     public double MaxValue { get; set; }
-
-    public List<MeasurementValue> Values { get; set; } = new();
 }

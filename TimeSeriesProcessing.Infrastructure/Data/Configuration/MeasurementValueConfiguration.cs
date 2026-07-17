@@ -26,8 +26,11 @@ public class MeasurementValueConfiguration : IEntityTypeConfiguration<Measuremen
 
         builder
             .HasOne(v => v.Result)
-            .WithMany(v => v.Values)
+            .WithMany(r => r.Values)
             .HasForeignKey(v => v.ResultId)
             .OnDelete(DeleteBehavior.Cascade);
+        
+        builder.HasIndex(v => new { v.ResultId, v.Date })
+            .HasDatabaseName("IX_Values_ResultId_Date");
     }
 }

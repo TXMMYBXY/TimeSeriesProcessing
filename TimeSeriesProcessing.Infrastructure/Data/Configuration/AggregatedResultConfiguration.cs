@@ -14,10 +14,13 @@ public class AggregatedResultConfiguration : IEntityTypeConfiguration<Aggregated
         
         builder.Property(r => r.FileName)
             .IsRequired()
-            .HasColumnType("varchar(100)")
-            .HasMaxLength(100);
+            .HasMaxLength(255);
+        
+        builder.HasIndex(r => r.FileName)
+            .IsUnique()
+            .HasDatabaseName("IX_Results_FileName_Unique");
 
-        builder.Property(r => r.DeltaDate)
+        builder.Property(r => r.DeltaSeconds)
             .IsRequired()
             .HasColumnType("integer");
         
@@ -27,7 +30,7 @@ public class AggregatedResultConfiguration : IEntityTypeConfiguration<Aggregated
 
         builder.Property(r => r.AvgExecutionTime)
             .IsRequired()
-            .HasColumnType("timestamp with time zone");
+            .HasColumnType("double precision");
         
         builder.Property(r => r.AvgValue)
             .IsRequired()

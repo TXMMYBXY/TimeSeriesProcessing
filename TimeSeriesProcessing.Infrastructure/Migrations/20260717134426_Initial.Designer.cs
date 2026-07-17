@@ -12,7 +12,7 @@ using TimeSeriesProcessing.Infrastructure.Data;
 namespace TimeSeriesProcessing.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260717093049_Initial")]
+    [Migration("20260717134426_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -33,19 +33,19 @@ namespace TimeSeriesProcessing.Infrastructure.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("AvgExecutionTime")
-                        .HasColumnType("timestamp with time zone");
+                    b.Property<double>("AvgExecutionTime")
+                        .HasColumnType("double precision");
 
                     b.Property<double>("AvgValue")
                         .HasColumnType("double precision");
 
-                    b.Property<int>("DeltaDate")
+                    b.Property<int>("DeltaSeconds")
                         .HasColumnType("integer");
 
                     b.Property<string>("FileName")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar(100)");
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)");
 
                     b.Property<double>("MaxValue")
                         .HasColumnType("double precision");
@@ -60,6 +60,10 @@ namespace TimeSeriesProcessing.Infrastructure.Migrations
                         .HasColumnType("double precision");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("FileName")
+                        .IsUnique()
+                        .HasDatabaseName("IX_Results_FileName_Unique");
 
                     b.ToTable("Results", (string)null);
                 });
@@ -86,7 +90,8 @@ namespace TimeSeriesProcessing.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ResultId");
+                    b.HasIndex("ResultId", "Date")
+                        .HasDatabaseName("IX_Values_ResultId_Date");
 
                     b.ToTable("Values", (string)null);
                 });
