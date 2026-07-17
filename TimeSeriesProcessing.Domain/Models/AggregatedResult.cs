@@ -7,7 +7,7 @@ public class AggregatedResult
     
     public int DeltaDate { get; set; }
     public DateTime MinDate { get; set; }
-    public double AvgExecutionTime { get; set; }
+    public DateTime AvgExecutionTime { get; set; }
     public double AvgValue { get; set; }
     public double MedianValue { get; set; }
     public double MinValue { get; set; }
