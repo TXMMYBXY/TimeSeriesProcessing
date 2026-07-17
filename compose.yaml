@@ -1,0 +1,7 @@
+﻿services:
+  timeseriesprocessing.api:
+    container_name: api
+    image: timeseriesprocessing.api
+    build:
+      context: .
+      dockerfile: TimeSeriesProcessing.Api/Dockerfile
