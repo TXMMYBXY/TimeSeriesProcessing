@@ -1,3 +1,4 @@
+using TimeSeriesProcessing.Application.Exceptions;
 using TimeSeriesProcessing.Application.Infrastructure.Validation;
 using TimeSeriesProcessing.Application.Infrastructure.Value.Dto;
 
@@ -5,47 +6,49 @@ namespace TimeSeriesProcessing.Infrastructure.Validation;
 
 public class ValueValidator : IValueValidator
 {
-    public ValidationResult CheckDate(DateTime dateTime)
+    private const int MinRows = 1;
+    private const int MaxRows = 10000;
+    private const int MinExecutionTime = 0;
+    private static readonly DateTime MinDate = 
+        new (2000, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+    
+    public void ValidateDate(DateTime dateTime)
     {
-        var isValid = dateTime >= IValueValidator.MinDate && dateTime <= DateTime.UtcNow;
-
-        return new ValidationResult
-        {
-            IsValid = isValid,
-            Message = isValid ? null : "Date is invalid."
-        };
-    }
-
-    public ValidationResult CheckExecutionTime(int executionTime)
-    {
-        var isValid = executionTime > IValueValidator.MinExecutionTime;
+        var isValid = dateTime >= MinDate && dateTime <= DateTime.UtcNow;
         
-        return new ValidationResult
+        if (!isValid)
         {
-            IsValid = isValid,
-            Message = isValid ? null : "Execution time is invalid."
-        };
+            throw new ValidationException("Date is invalid.");
+        }
     }
 
-    public ValidationResult CheckValue(double value)
+    public void ValidateExecutionTime(int executionTime)
     {
-        var isValid = double.IsPositive(value);
-
-        return new ValidationResult
+        var isValid = executionTime >= MinExecutionTime;
+        
+        if (!isValid)
         {
-            IsValid = isValid,
-            Message = isValid ? null : "Value is invalid."
-        };
+            throw new ValidationException("Execution time is invalid.");
+        }
     }
 
-    public ValidationResult CheckCount(IReadOnlyList<CreateValueDto> valuesDto)
+    public void ValidateValue(double value)
     {
-        var isValid = valuesDto.Count > IValueValidator.MinRows && valuesDto.Count < IValueValidator.MaxRows;
-
-        return new ValidationResult
+        var isValid = value >= 0;
+        
+        if (!isValid)
         {
-            IsValid = isValid,
-            Message = isValid ? null : "Count is invalid."
-        };
+            throw new ValidationException("Value is invalid.");
+        }
+    }
+
+    public void ValidateCount(IReadOnlyList<CsvRowDto> valuesDto)
+    {
+        var isValid = valuesDto.Count >= MinRows && valuesDto.Count <= MaxRows;
+        
+        if (!isValid)
+        {
+            throw new ValidationException("Invalid count of rows.");
+        }
     }
 }
