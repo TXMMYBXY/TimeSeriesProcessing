@@ -1,4 +1,4 @@
-namespace TimeSeriesProcessing.Application.Infrastructure.Value.Dto;
+namespace TimeSeriesProcessing.Application.Infrastructure.Repositories.Value.Dto;
 
 public class ValueInfoDto
 {

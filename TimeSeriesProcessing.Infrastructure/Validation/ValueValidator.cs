@@ -1,6 +1,6 @@
 using TimeSeriesProcessing.Application.Exceptions;
+using TimeSeriesProcessing.Application.Infrastructure.Repositories.Value.Dto;
 using TimeSeriesProcessing.Application.Infrastructure.Validation;
-using TimeSeriesProcessing.Application.Infrastructure.Value.Dto;
 
 namespace TimeSeriesProcessing.Infrastructure.Validation;
 
@@ -42,7 +42,7 @@ public class ValueValidator : IValueValidator
         }
     }
 
-    public void ValidateCount(IReadOnlyList<CsvRowDto> valuesDto)
+    public void ValidateCount(IReadOnlyList<CsvRow> valuesDto)
     {
         var isValid = valuesDto.Count >= MinRows && valuesDto.Count <= MaxRows;
         

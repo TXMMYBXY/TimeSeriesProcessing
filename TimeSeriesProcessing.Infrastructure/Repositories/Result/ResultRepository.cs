@@ -1,10 +1,10 @@
 using Microsoft.EntityFrameworkCore;
-using TimeSeriesProcessing.Application.Infrastructure.Result;
-using TimeSeriesProcessing.Application.Infrastructure.Result.Dto;
+using TimeSeriesProcessing.Application.Infrastructure.Repositories.Result;
+using TimeSeriesProcessing.Application.Infrastructure.Repositories.Result.Dto;
 using TimeSeriesProcessing.Domain.Models;
 using TimeSeriesProcessing.Infrastructure.Data;
 
-namespace TimeSeriesProcessing.Infrastructure.Result;
+namespace TimeSeriesProcessing.Infrastructure.Repositories.Result;
 
 public class ResultRepository : IResultRepository
 {

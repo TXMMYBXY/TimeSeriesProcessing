@@ -1,6 +1,6 @@
 using TimeSeriesProcessing.Application.Exceptions;
+using TimeSeriesProcessing.Application.Infrastructure.Repositories.Value.Dto;
 using TimeSeriesProcessing.Application.Infrastructure.Validation;
-using TimeSeriesProcessing.Application.Infrastructure.Value.Dto;
 
 namespace TimeSeriesProcessing.Infrastructure.Validation;
 
@@ -13,7 +13,7 @@ public class ValidationService : IValidationService
         _valueValidator = valueValidator;
     }
     
-    public void Validate(IReadOnlyList<CsvRowDto> rows)
+    public void Validate(IReadOnlyList<CsvRow> rows)
     {
         _valueValidator.ValidateCount(rows);
         
@@ -23,7 +23,7 @@ public class ValidationService : IValidationService
         }
     }
 
-    private void ValidateRow(CsvRowDto row, int index)
+    private void ValidateRow(CsvRow row, int index)
     {
         try
         {

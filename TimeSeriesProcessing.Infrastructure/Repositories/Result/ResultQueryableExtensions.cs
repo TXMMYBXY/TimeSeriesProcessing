@@ -1,7 +1,7 @@
-using TimeSeriesProcessing.Application.Infrastructure.Result;
+using TimeSeriesProcessing.Application.Infrastructure.Repositories.Result;
 using TimeSeriesProcessing.Domain.Models;
 
-namespace TimeSeriesProcessing.Infrastructure.Result;
+namespace TimeSeriesProcessing.Infrastructure.Repositories.Result;
 
 public static class ResultQueryableExtensions
 {

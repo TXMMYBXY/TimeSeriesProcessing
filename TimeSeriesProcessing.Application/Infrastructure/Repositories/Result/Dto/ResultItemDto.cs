@@ -1,4 +1,4 @@
-namespace TimeSeriesProcessing.Application.Infrastructure.Result.Dto;
+namespace TimeSeriesProcessing.Application.Infrastructure.Repositories.Result.Dto;
 
 public class ResultItemDto
 {
