@@ -1,4 +1,4 @@
-using TimeSeriesProcessing.Application.Result;
+using TimeSeriesProcessing.Application.Infrastructure.Result;
 using TimeSeriesProcessing.Domain.Models;
 
 namespace TimeSeriesProcessing.Infrastructure.Result;

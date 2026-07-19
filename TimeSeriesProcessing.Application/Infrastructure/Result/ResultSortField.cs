@@ -1,4 +1,4 @@
-namespace TimeSeriesProcessing.Application.Result;
+namespace TimeSeriesProcessing.Application.Infrastructure.Result;
 
 public enum ResultSortField
 {

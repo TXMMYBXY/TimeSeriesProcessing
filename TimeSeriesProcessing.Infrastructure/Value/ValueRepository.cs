@@ -1,16 +1,18 @@
 using Microsoft.EntityFrameworkCore;
-using TimeSeriesProcessing.Application.Value;
-using TimeSeriesProcessing.Application.Value.Dto;
-using TimeSeriesProcessing.Domain.Models;
+using TimeSeriesProcessing.Application.Infrastructure.Value;
+using TimeSeriesProcessing.Application.Infrastructure.Value.Dto;
 using TimeSeriesProcessing.Infrastructure.Data;
-using TimeSeriesProcessing.Infrastructure.Repositories;
 
 namespace TimeSeriesProcessing.Infrastructure.Value;
 
-public class ValueRepository : BaseRepository<MeasurementValue>, IValueRepository
+public class ValueRepository : IValueRepository
 {
-    public ValueRepository(ApplicationDbContext dbContext) : base(dbContext)
-    { }
+    private readonly ApplicationDbContext _dbContext;
+
+    public ValueRepository(ApplicationDbContext dbContext)
+    {
+        _dbContext = dbContext;
+    }
 
     public async Task<IReadOnlyList<ValueInfoDto>> GetValuesByFileNameAsync(string fileName)
     {
