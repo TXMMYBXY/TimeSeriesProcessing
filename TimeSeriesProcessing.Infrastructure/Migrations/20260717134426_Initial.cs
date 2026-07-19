@@ -18,10 +18,10 @@ namespace TimeSeriesProcessing.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    FileName = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false),
-                    DeltaDate = table.Column<int>(type: "integer", nullable: false),
+                    FileName = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
+                    DeltaSeconds = table.Column<int>(type: "integer", nullable: false),
                     MinDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    AvgExecutionTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    AvgExecutionTime = table.Column<double>(type: "double precision", nullable: false),
                     AvgValue = table.Column<double>(type: "double precision", nullable: false),
                     MedianValue = table.Column<double>(type: "double precision", nullable: false),
                     MinValue = table.Column<double>(type: "double precision", nullable: false),
@@ -55,9 +55,15 @@ namespace TimeSeriesProcessing.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Values_ResultId",
+                name: "IX_Results_FileName_Unique",
+                table: "Results",
+                column: "FileName",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Values_ResultId_Date",
                 table: "Values",
-                column: "ResultId");
+                columns: new[] { "ResultId", "Date" });
         }
 
         /// <inheritdoc />
