@@ -1,6 +1,6 @@
+using TimeSeriesProcessing.Application.Abstractions.Parsing;
+using TimeSeriesProcessing.Application.Abstractions.Validation;
 using TimeSeriesProcessing.Application.Exceptions;
-using TimeSeriesProcessing.Application.Infrastructure.Repositories.Value.Dto;
-using TimeSeriesProcessing.Application.Infrastructure.Validation;
 
 namespace TimeSeriesProcessing.Infrastructure.Validation;
 

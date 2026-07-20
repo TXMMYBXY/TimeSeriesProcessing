@@ -1,10 +1,10 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using TimeSeriesProcessing.Application.Infrastructure.Parsing;
-using TimeSeriesProcessing.Application.Infrastructure.Repositories.Result;
-using TimeSeriesProcessing.Application.Infrastructure.Repositories.Value;
-using TimeSeriesProcessing.Application.Infrastructure.Validation;
+using TimeSeriesProcessing.Application.Abstractions.Parsing;
+using TimeSeriesProcessing.Application.Abstractions.Repositories.Result;
+using TimeSeriesProcessing.Application.Abstractions.Repositories.Value;
+using TimeSeriesProcessing.Application.Abstractions.Validation;
 using TimeSeriesProcessing.Infrastructure.Data;
 using TimeSeriesProcessing.Infrastructure.Parsing;
 using TimeSeriesProcessing.Infrastructure.Repositories.Result;

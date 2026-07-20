@@ -1,4 +1,4 @@
-namespace TimeSeriesProcessing.Application.Infrastructure.Repositories.Result;
+namespace TimeSeriesProcessing.Application.Abstractions.Repositories.Result;
 
 public class ResultFilter
 {

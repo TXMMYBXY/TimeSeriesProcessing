@@ -15,7 +15,9 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Infrastructure\Repositories\" />
+      <Folder Include="Abstractions\Repositories\" />
+      <Folder Include="Services\Result\" />
+      <Folder Include="Services\Value\" />
     </ItemGroup>
 
 </Project>

@@ -1,4 +1,4 @@
-namespace TimeSeriesProcessing.Application.Infrastructure.Repositories.Value.Dto;
+namespace TimeSeriesProcessing.Application.Abstractions.Parsing;
 
 public class CsvRow
 {

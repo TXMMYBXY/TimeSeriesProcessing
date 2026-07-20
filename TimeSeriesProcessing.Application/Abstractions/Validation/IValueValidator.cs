@@ -1,6 +1,6 @@
-using TimeSeriesProcessing.Application.Infrastructure.Repositories.Value.Dto;
+using TimeSeriesProcessing.Application.Abstractions.Parsing;
 
-namespace TimeSeriesProcessing.Application.Infrastructure.Validation;
+namespace TimeSeriesProcessing.Application.Abstractions.Validation;
 
 public interface IValueValidator
 {

@@ -1,7 +1,7 @@
-using TimeSeriesProcessing.Application.Infrastructure.Repositories.Result.Dto;
+using TimeSeriesProcessing.Application.Services.Result.Dto;
 using TimeSeriesProcessing.Domain.Models;
 
-namespace TimeSeriesProcessing.Application.Infrastructure.Repositories.Result;
+namespace TimeSeriesProcessing.Application.Abstractions.Repositories.Result;
 
 public interface IResultRepository
 {

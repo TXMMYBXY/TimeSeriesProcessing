@@ -1,5 +1,5 @@
 using CsvHelper.Configuration;
-using TimeSeriesProcessing.Application.Infrastructure.Repositories.Value.Dto;
+using TimeSeriesProcessing.Application.Abstractions.Parsing;
 
 namespace TimeSeriesProcessing.Infrastructure.Parsing.MappingProfile;
 

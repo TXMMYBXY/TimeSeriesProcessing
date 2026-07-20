@@ -2,9 +2,8 @@ using System.Globalization;
 using CsvHelper;
 using CsvHelper.Configuration;
 using CsvHelper.TypeConversion;
+using TimeSeriesProcessing.Application.Abstractions.Parsing;
 using TimeSeriesProcessing.Application.Exceptions;
-using TimeSeriesProcessing.Application.Infrastructure.Parsing;
-using TimeSeriesProcessing.Application.Infrastructure.Repositories.Value.Dto;
 using TimeSeriesProcessing.Infrastructure.Parsing.MappingProfile;
 
 namespace TimeSeriesProcessing.Infrastructure.Parsing;
@@ -28,7 +27,7 @@ public class ParsingService : IParsingService
         try
         {
             using var reader = new StreamReader(stream);
-            using var csvReader = new CsvReader(reader, config);
+            using var csvReader = new CsvReader(reader, config);    
 
             csvReader.Context.RegisterClassMap<CsvRowMap>();
 
