@@ -5,6 +5,8 @@ using TimeSeriesProcessing.Application.Abstractions.Parsing;
 using TimeSeriesProcessing.Application.Abstractions.Repositories.Result;
 using TimeSeriesProcessing.Application.Abstractions.Repositories.Value;
 using TimeSeriesProcessing.Application.Abstractions.Validation;
+using TimeSeriesProcessing.Application.Services.Result;
+using TimeSeriesProcessing.Application.Services.Value;
 using TimeSeriesProcessing.Infrastructure.Data;
 using TimeSeriesProcessing.Infrastructure.Parsing;
 using TimeSeriesProcessing.Infrastructure.Repositories.Result;
@@ -22,6 +24,8 @@ public static class DependencyInjection
         services.AddScoped<IValueValidator, ValueValidator>();
         services.AddScoped<IValidationService, ValidationService>();
         services.AddScoped<IParsingService, ParsingService>();
+        services.AddScoped<IResultService, ResultService>();
+        services.AddScoped<IValueService, ValueService>();
         
         
         var connectionString = configuration.GetConnectionString("DefaultConnection");

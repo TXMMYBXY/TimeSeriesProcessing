@@ -1,6 +1,6 @@
 namespace TimeSeriesProcessing.Application.Services.Value.Dto;
 
-public class ValueInfoDto
+public class ValueItemDto
 {
     public int Id { get; set; }
     public DateTime Date { get; set; }

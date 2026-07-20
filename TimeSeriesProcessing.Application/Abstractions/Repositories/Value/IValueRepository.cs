@@ -4,5 +4,5 @@ namespace TimeSeriesProcessing.Application.Abstractions.Repositories.Value;
 
 public interface IValueRepository
 {
-    Task<IReadOnlyList<ValueInfoDto>> GetValuesByFileNameAsync(string fileName);
+    Task<IReadOnlyList<ValueItemDto>> GetValuesByFileNameAsync(string fileName);
 }

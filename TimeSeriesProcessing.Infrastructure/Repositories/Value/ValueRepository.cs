@@ -14,14 +14,14 @@ public class ValueRepository : IValueRepository
         _dbContext = dbContext;
     }
 
-    public async Task<IReadOnlyList<ValueInfoDto>> GetValuesByFileNameAsync(string fileName)
+    public async Task<IReadOnlyList<ValueItemDto>> GetValuesByFileNameAsync(string fileName)
     {
         return await _dbContext.Values
             .AsNoTracking()
             .Where(v => v.Result.FileName.Equals(fileName))
             .OrderByDescending(v => v.Date)
             .Take(10)
-            .Select(v => new ValueInfoDto
+            .Select(v => new ValueItemDto
             {
                 Id = v.Id,
                 Date = v.Date,
