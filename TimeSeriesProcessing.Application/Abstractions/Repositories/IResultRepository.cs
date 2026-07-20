@@ -6,10 +6,10 @@ namespace TimeSeriesProcessing.Application.Abstractions.Repositories;
 
 public interface IResultRepository
 {
-    Task<(IReadOnlyList<ResultItemDto> Results, int Count)> GetResultsAsync(ResultFilter filter);
-    Task<AggregatedResult?> GetResultEntityByIdAsync(int id);
+    Task<(IReadOnlyList<ResultItemDto> Results, int TotalCount)> GetResultsAsync(ResultFilter filter);
+    Task<AggregatedResult?> GetByFileNameAsync(string fileName);
     Task InsertResultAsync(AggregatedResult result);
-    void DeleteResultAsync(AggregatedResult result);
+    void DeleteResult(AggregatedResult result);
     /// <summary>
     /// Saves all changes in context
     /// </summary>

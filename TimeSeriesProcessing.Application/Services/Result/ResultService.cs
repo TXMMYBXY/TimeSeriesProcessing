@@ -23,8 +23,7 @@ public class ResultService : IResultService
             throw new CsvValidationException("No rows were provided");
         }
         
-        CalculateResults(rows, out var args);
-
+        var args = CalculateResults(rows);
         var aggregatedResult = new AggregatedResult
         {
             FileName = fileName,
@@ -38,6 +37,13 @@ public class ResultService : IResultService
             Values = rows.Select(r => r.ToEntity()).ToList()
         };
         
+        var oldResult = await _resultRepository.GetByFileNameAsync(fileName);
+
+        if (oldResult != null)
+        {
+            _resultRepository.DeleteResult(oldResult);
+        }
+        
         await _resultRepository.InsertResultAsync(aggregatedResult);
         await _resultRepository.SaveChangesAsync();
     }
@@ -49,15 +55,15 @@ public class ResultService : IResultService
         return new PagedResultDto
         {
             Results = resultsTuple.Results,
-            TotalCount = resultsTuple.Results.Count,
-            PageSize = filter.PageSize ?? resultsTuple.Count,
+            TotalCount = resultsTuple.TotalCount,
+            PageSize = filter.PageSize ?? resultsTuple.Results.Count,
             CurrentPage = filter.PageNumber ?? 1
         };
     }
 
-    private static void CalculateResults(IReadOnlyList<CsvRow> rows, out CalculateResultParams args)
+    private static CalculateResultArgs CalculateResults(IReadOnlyList<CsvRow> rows)
     {
-        args = new CalculateResultParams();
+        var args = new CalculateResultArgs();
         var sumExecutionTime = 0.0;
         var sumValue = 0.0;
         var count = rows.Count;
@@ -100,6 +106,8 @@ public class ResultService : IResultService
         
         args.AvgExecutionTime = sumExecutionTime / count;
         args.AvgValue = sumValue / count;
+
+        return args;
     }
 
     private static double MedianValue(IReadOnlyList<CsvRow> rows)

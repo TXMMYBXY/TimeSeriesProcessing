@@ -1,6 +1,6 @@
 namespace TimeSeriesProcessing.Application.Services.Result;
 
-public class CalculateResultParams
+public class CalculateResultArgs
 {
     public double AvgExecutionTime { get; set; }
     public double AvgValue { get; set; }
