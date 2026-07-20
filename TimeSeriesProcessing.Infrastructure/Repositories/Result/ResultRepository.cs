@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
-using TimeSeriesProcessing.Application.Abstractions.Repositories.Result;
+using TimeSeriesProcessing.Application.Abstractions.Repositories;
+using TimeSeriesProcessing.Application.Services.Result;
 using TimeSeriesProcessing.Application.Services.Result.Dto;
 using TimeSeriesProcessing.Domain.Models;
 using TimeSeriesProcessing.Infrastructure.Data;
@@ -14,7 +15,7 @@ public class ResultRepository : IResultRepository
         _dbContext = dbContext;
     }
     
-    public async Task<(IReadOnlyList<ResultItemDto> Results, int Count)> GetResultsAsync(ResultFilter filter)
+    public async Task<(IReadOnlyList<ResultItemDto> Results, int TotalCount)> GetResultsAsync(ResultFilter filter)
     {
         var query = _dbContext.Results
             .AsNoTracking()
@@ -41,11 +42,10 @@ public class ResultRepository : IResultRepository
         return (result, totalCount);
     }
 
-    public async Task<AggregatedResult?> GetResultEntityByIdAsync(int id)
+    public async Task<AggregatedResult?> GetByFileNameAsync(string fileName)
     {
         return await _dbContext.Results
-            .AsNoTracking()
-            .Where(r => r.Id == id)
+            .Where(r => r.FileName == fileName)
             .FirstOrDefaultAsync();
     }
 
@@ -54,7 +54,7 @@ public class ResultRepository : IResultRepository
         await _dbContext.Results.AddAsync(result);
     }
 
-    public void DeleteResultAsync(AggregatedResult result)
+    public void DeleteResult(AggregatedResult result)
     {
         _dbContext.Results.Remove(result);
     }

@@ -1,4 +1,4 @@
-using TimeSeriesProcessing.Application.Abstractions.Repositories.Result;
+using TimeSeriesProcessing.Application.Services.Result;
 using TimeSeriesProcessing.Domain.Models;
 
 namespace TimeSeriesProcessing.Infrastructure.Repositories.Result;
