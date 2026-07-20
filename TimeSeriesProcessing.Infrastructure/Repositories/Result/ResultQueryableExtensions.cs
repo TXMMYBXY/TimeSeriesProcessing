@@ -34,7 +34,7 @@ public static class ResultQueryableExtensions
     public static IQueryable<AggregatedResult> ApplySorting(this IQueryable<AggregatedResult> query, 
         ResultFilter filter)
     {
-        return filter.OrderBy.Value switch
+        return filter.OrderBy switch
         {
             ResultSortField.FileName =>
                 filter.Descending

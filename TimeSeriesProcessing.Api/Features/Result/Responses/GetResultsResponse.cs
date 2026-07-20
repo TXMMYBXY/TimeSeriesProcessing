@@ -1,8 +1,8 @@
-namespace TimeSeriesProcessing.Application.Services.Result.Dto;
+namespace TimeSeriesProcessing.Api.Features.Result.Responses;
 
-public class PagedResultDto
+public class GetResultsResponse
 {
-    public IReadOnlyList<ResultItemDto> Results { get; set; }
+    public IReadOnlyList<ResultItemResponse> Results { get; set; }
     
     public int TotalCount { get; set; }
     public int PageSize { get; set; }

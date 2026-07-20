@@ -16,7 +16,7 @@ namespace TimeSeriesProcessing.Infrastructure;
 
 public static class DependencyInjection
 {
-    public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection RegisterServices(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddScoped<IResultRepository, ResultRepository>();
         services.AddScoped<IValueRepository, ValueRepository>();
@@ -25,7 +25,6 @@ public static class DependencyInjection
         services.AddScoped<IParsingService, ParsingService>();
         services.AddScoped<IResultService, ResultService>();
         services.AddScoped<IValueService, ValueService>();
-        
         
         var connectionString = configuration.GetConnectionString("DefaultConnection");
         

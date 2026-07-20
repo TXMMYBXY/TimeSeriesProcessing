@@ -9,7 +9,7 @@ public static class CsvRowMappingExtensions
     {
         return new MeasurementValue
         {
-            Date = row.Date,
+            Date = DateTime.SpecifyKind(row.Date, DateTimeKind.Utc),
             ExecutionTime = row.ExecutionTime,
             Value = row.Value,
         };
