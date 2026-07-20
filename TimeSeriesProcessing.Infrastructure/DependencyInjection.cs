@@ -1,11 +1,15 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using TimeSeriesProcessing.Application.Infrastructure.Result;
-using TimeSeriesProcessing.Application.Infrastructure.Value;
+using TimeSeriesProcessing.Application.Abstractions.Parsing;
+using TimeSeriesProcessing.Application.Abstractions.Repositories.Result;
+using TimeSeriesProcessing.Application.Abstractions.Repositories.Value;
+using TimeSeriesProcessing.Application.Abstractions.Validation;
 using TimeSeriesProcessing.Infrastructure.Data;
-using TimeSeriesProcessing.Infrastructure.Result;
-using TimeSeriesProcessing.Infrastructure.Value;
+using TimeSeriesProcessing.Infrastructure.Parsing;
+using TimeSeriesProcessing.Infrastructure.Repositories.Result;
+using TimeSeriesProcessing.Infrastructure.Repositories.Value;
+using TimeSeriesProcessing.Infrastructure.Validation;
 
 namespace TimeSeriesProcessing.Infrastructure;
 
@@ -15,6 +19,10 @@ public static class DependencyInjection
     {
         services.AddScoped<IResultRepository, ResultRepository>();
         services.AddScoped<IValueRepository, ValueRepository>();
+        services.AddScoped<IValueValidator, ValueValidator>();
+        services.AddScoped<IValidationService, ValidationService>();
+        services.AddScoped<IParsingService, ParsingService>();
+        
         
         var connectionString = configuration.GetConnectionString("DefaultConnection");
         

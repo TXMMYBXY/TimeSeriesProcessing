@@ -1,7 +1,8 @@
-namespace TimeSeriesProcessing.Application.Infrastructure.Result.Dto;
+namespace TimeSeriesProcessing.Application.Services.Result.Dto;
 
 public class ResultItemDto
 {
+
     public int Id { get; set; }
     public string FileName { get; set; }
     public int DeltaSeconds { get; set; }

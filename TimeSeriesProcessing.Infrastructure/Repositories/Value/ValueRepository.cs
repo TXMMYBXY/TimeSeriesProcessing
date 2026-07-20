@@ -1,9 +1,9 @@
 using Microsoft.EntityFrameworkCore;
-using TimeSeriesProcessing.Application.Infrastructure.Value;
-using TimeSeriesProcessing.Application.Infrastructure.Value.Dto;
+using TimeSeriesProcessing.Application.Abstractions.Repositories.Value;
+using TimeSeriesProcessing.Application.Services.Value.Dto;
 using TimeSeriesProcessing.Infrastructure.Data;
 
-namespace TimeSeriesProcessing.Infrastructure.Value;
+namespace TimeSeriesProcessing.Infrastructure.Repositories.Value;
 
 public class ValueRepository : IValueRepository
 {
