@@ -1,5 +1,6 @@
 using TimeSeriesProcessing.Application.Abstractions.Parsing;
 using TimeSeriesProcessing.Application.Abstractions.Repositories;
+using TimeSeriesProcessing.Application.Exceptions;
 using TimeSeriesProcessing.Application.Mappings;
 using TimeSeriesProcessing.Application.Services.Result.Dto;
 using TimeSeriesProcessing.Domain.Models;
@@ -19,7 +20,7 @@ public class ResultService : IResultService
     {
         if (rows == null || rows.Count == 0) 
         {
-            return; 
+            throw new CsvValidationException("No rows were provided");
         }
         
         CalculateResults(rows, out var args);
@@ -73,7 +74,7 @@ public class ResultService : IResultService
                 args.MaxExecutionTime = row.ExecutionTime;
             }
             
-            if(args.MinDate > row.Date)
+            if (args.MinDate > row.Date)
             {
                 args.MinDate = row.Date;
             }
