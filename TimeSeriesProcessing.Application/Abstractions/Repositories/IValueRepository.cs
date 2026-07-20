@@ -1,6 +1,6 @@
 using TimeSeriesProcessing.Application.Services.Value.Dto;
 
-namespace TimeSeriesProcessing.Application.Abstractions.Repositories.Value;
+namespace TimeSeriesProcessing.Application.Abstractions.Repositories;
 
 public interface IValueRepository
 {

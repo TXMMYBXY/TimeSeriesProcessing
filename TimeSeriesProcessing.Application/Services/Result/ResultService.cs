@@ -1,6 +1,7 @@
 using TimeSeriesProcessing.Application.Abstractions.Parsing;
-using TimeSeriesProcessing.Application.Abstractions.Repositories.Result;
+using TimeSeriesProcessing.Application.Abstractions.Repositories;
 using TimeSeriesProcessing.Application.Mappings;
+using TimeSeriesProcessing.Application.Services.Result.Dto;
 using TimeSeriesProcessing.Domain.Models;
 
 namespace TimeSeriesProcessing.Application.Services.Result;
@@ -40,11 +41,25 @@ public class ResultService : IResultService
         await _resultRepository.SaveChangesAsync();
     }
 
+    public async Task<PagedResultDto> GetResultsAsync(ResultFilter filter)
+    {
+        var resultsTuple = await _resultRepository.GetResultsAsync(filter);
+
+        return new PagedResultDto
+        {
+            Results = resultsTuple.Results,
+            TotalCount = resultsTuple.Results.Count,
+            PageSize = filter.PageSize ?? resultsTuple.Count,
+            CurrentPage = filter.PageNumber ?? 1
+        };
+    }
+
     private static void CalculateResults(IReadOnlyList<CsvRow> rows, out CalculateResultParams args)
     {
         args = new CalculateResultParams();
         var sumExecutionTime = 0.0;
         var sumValue = 0.0;
+        var count = rows.Count;
             
         foreach (var row in rows)
         {
@@ -82,8 +97,8 @@ public class ResultService : IResultService
             sumExecutionTime += row.ExecutionTime;
         }
         
-        args.AvgExecutionTime = sumExecutionTime / rows.Count;
-        args.AvgValue = sumValue / rows.Count;
+        args.AvgExecutionTime = sumExecutionTime / count;
+        args.AvgValue = sumValue / count;
     }
 
     private static double MedianValue(IReadOnlyList<CsvRow> rows)

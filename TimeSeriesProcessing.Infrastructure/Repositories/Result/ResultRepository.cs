@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
-using TimeSeriesProcessing.Application.Abstractions.Repositories.Result;
+using TimeSeriesProcessing.Application.Abstractions.Repositories;
+using TimeSeriesProcessing.Application.Services.Result;
 using TimeSeriesProcessing.Application.Services.Result.Dto;
 using TimeSeriesProcessing.Domain.Models;
 using TimeSeriesProcessing.Infrastructure.Data;

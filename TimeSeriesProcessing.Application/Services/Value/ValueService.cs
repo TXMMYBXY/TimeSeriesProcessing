@@ -1,7 +1,9 @@
 using TimeSeriesProcessing.Application.Abstractions.Parsing;
-using TimeSeriesProcessing.Application.Abstractions.Repositories.Value;
+using TimeSeriesProcessing.Application.Abstractions.Repositories;
 using TimeSeriesProcessing.Application.Abstractions.Validation;
+using TimeSeriesProcessing.Application.Exceptions;
 using TimeSeriesProcessing.Application.Services.Result;
+using TimeSeriesProcessing.Application.Services.Value.Dto;
 
 namespace TimeSeriesProcessing.Application.Services.Value;
 
@@ -31,5 +33,12 @@ public class ValueService : IValueService
         _validationService.Validate(rows);
         
         await _resultService.InsertResultAsync(fileName, rows);
+    }
+
+    public async Task<IReadOnlyList<ValueItemDto>> GetValuesByFileNameAsync(string fileName)
+    {
+        var values = await _valueRepository.GetValuesByFileNameAsync(fileName);
+
+        return values.Count == 0 ? throw new NotFoundException("No values found") : values;
     }
 }
