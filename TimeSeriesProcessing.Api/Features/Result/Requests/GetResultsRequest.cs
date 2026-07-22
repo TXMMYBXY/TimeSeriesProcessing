@@ -4,6 +4,9 @@ namespace TimeSeriesProcessing.Api.Features.Result.Requests;
 
 public class GetResultsRequest
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public ResultSortField? OrderBy { get; set; }
     public bool Descending { get; set; }
     
