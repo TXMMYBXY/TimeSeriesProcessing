@@ -60,7 +60,8 @@ public class ErrorHandlingMiddleware
         catch (Exception ex)
         {
             statusCode = HttpStatusCode.InternalServerError;
-            message = "An unexpected error occurred.";
+            message = ex.Message;
+            // message = "An unexpected error occurred.";
             _logger.LogError(ex, "An unexpected error occurred");
         }
 

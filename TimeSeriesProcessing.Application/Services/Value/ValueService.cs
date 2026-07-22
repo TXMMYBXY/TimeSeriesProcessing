@@ -35,10 +35,10 @@ public class ValueService : IValueService
         await _resultService.InsertResultAsync(fileName, rows);
     }
 
-    public async Task<IReadOnlyList<ValueItemDto>> GetValuesByFileNameAsync(string fileName)
+    public async Task<GetValuesDto> GetValuesByFileNameAsync(string fileName)
     {
         var values = await _valueRepository.GetValuesByFileNameAsync(fileName);
 
-        return values.Count == 0 ? throw new NotFoundException("No values found") : values;
+        return values.Count == 0 ? throw new NotFoundException("No values found") : new GetValuesDto{ Values = values };
     }
 }
