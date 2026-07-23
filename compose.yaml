@@ -1,18 +1,33 @@
 ﻿services:
-  timeseriesprocessing.api:
-    container_name: api
+  api:
     image: timeseriesprocessing.api
     build:
       context: .
       dockerfile: TimeSeriesProcessing.Api/Dockerfile
     environment:
-      ASPNETCORE_ENVIRONMENT: Production
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ConnectionStrings__DefaultConnection=Host=db;Database=${POSTGRES_DB};Username=${POSTGRES_USER};Password=${POSTGRES_PASSWORD};
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8080:8080"
 
-  timeseriesprocessing.db:
-    container_name: db
+  db:
     image: postgres:16
     restart: unless-stopped
     environment:
       POSTGRES_DB: ${POSTGRES_DB}
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}" ]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
